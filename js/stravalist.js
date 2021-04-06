@@ -39,9 +39,32 @@ async function isStravaAuthenticated(){
         window.location.href = '/signin.html';
     });
     function requestUnicorn(pickupLocation) {
+        function requestUnicorn(pickupLocation) {
+            $.ajax({
+                method: 'POST',
+                url: _config.api.invokeUrl + '/ride',
+                headers: {
+                    Authorization: authToken
+                },
+                data: JSON.stringify({
+                    PickupLocation: {
+                        Latitude: pickupLocation.latitude,
+                        Longitude: pickupLocation.longitude
+                    }
+                }),
+                contentType: 'application/json',
+                success: completeRequest,
+                error: function ajaxError(jqXHR, textStatus, errorThrown) {
+                    console.error('Error requesting ride: ', textStatus, ', Details: ', errorThrown);
+                    console.error('Response: ', jqXHR.responseText);
+                    alert('An error occured when requesting your unicorn:\n' + jqXHR.responseText);
+                }
+            });
+        }
+    
         $.ajax({
             method: 'POST',
-            url: _config.api.invokeUrl + '/ride',
+            url: _config.api.invokeUrlSam + '/ride',
             headers: {
                 Authorization: authToken
             },
