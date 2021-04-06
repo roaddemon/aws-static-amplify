@@ -16,8 +16,8 @@ async function isStravaAuthenticated(){
         },
         data: JSON.stringify({
             PickupLocation: {
-                Latitude: pickupLocation.latitude,
-                Longitude: pickupLocation.longitude
+                Latitude: "25",
+                Longitude: "50"
             }
         }),
         contentType: 'application/json',
