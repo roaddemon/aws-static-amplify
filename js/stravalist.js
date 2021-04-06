@@ -8,6 +8,27 @@ async function isStravaAuthenticated(){
     WildRydes.authToken.then(val => console.log(val));
 
     console.log(JSON.stringify(authToken));
+    $.ajax({
+        method: 'POST',
+        url: _config.api.invokeUrl + '/ride',
+        headers: {
+            Authorization: authToken
+        },
+        data: JSON.stringify({
+            PickupLocation: {
+                Latitude: pickupLocation.latitude,
+                Longitude: pickupLocation.longitude
+            }
+        }),
+        contentType: 'application/json',
+        success: completeRequest,
+        error: function ajaxError(jqXHR, textStatus, errorThrown) {
+            console.error('Error requesting ride: ', textStatus, ', Details: ', errorThrown);
+            console.error('Response: ', jqXHR.responseText);
+            alert('An error occured when requesting your unicorn:\n' + jqXHR.responseText);
+        }
+    });
+
     result = await $.ajax({
         method: 'POST',
         url: _config.api.invokeUrlSam + '/hasuserauthenticatedstrava',
@@ -38,51 +59,6 @@ async function isStravaAuthenticated(){
         alert(error);
         window.location.href = '/signin.html';
     });
-    function requestUnicorn(pickupLocation) {
-        function requestUnicorn(pickupLocation) {
-            $.ajax({
-                method: 'POST',
-                url: _config.api.invokeUrl + '/ride',
-                headers: {
-                    Authorization: authToken
-                },
-                data: JSON.stringify({
-                    PickupLocation: {
-                        Latitude: pickupLocation.latitude,
-                        Longitude: pickupLocation.longitude
-                    }
-                }),
-                contentType: 'application/json',
-                success: completeRequest,
-                error: function ajaxError(jqXHR, textStatus, errorThrown) {
-                    console.error('Error requesting ride: ', textStatus, ', Details: ', errorThrown);
-                    console.error('Response: ', jqXHR.responseText);
-                    alert('An error occured when requesting your unicorn:\n' + jqXHR.responseText);
-                }
-            });
-        }
-    
-        $.ajax({
-            method: 'POST',
-            url: _config.api.invokeUrlSam + '/ride',
-            headers: {
-                Authorization: authToken
-            },
-            data: JSON.stringify({
-                PickupLocation: {
-                    Latitude: pickupLocation.latitude,
-                    Longitude: pickupLocation.longitude
-                }
-            }),
-            contentType: 'application/json',
-            success: completeRequest,
-            error: function ajaxError(jqXHR, textStatus, errorThrown) {
-                console.error('Error requesting ride: ', textStatus, ', Details: ', errorThrown);
-                console.error('Response: ', jqXHR.responseText);
-                alert('An error occured when requesting your unicorn:\n' + jqXHR.responseText);
-            }
-        });
-    }
 
     function completeRequest(result) {
         var unicorn;
