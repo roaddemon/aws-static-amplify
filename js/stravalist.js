@@ -5,7 +5,9 @@ WildRydes.map = WildRydes.map || {};
 
 async function isStravaAuthenticated(){
     const authToken = await WildRydes.authToken();
-    alert(authToken);
+    WildRydes.authToken.then(val => console.log(val));
+
+    console.log(JSON.stringify(authToken));
     result = await $.ajax({
         method: 'POST',
         url: _config.api.invokeUrl + '/ride',
@@ -31,7 +33,7 @@ async function isStravaAuthenticated(){
 
 
 (function straveListScopeWrapper($) {
-    isStravaAuthenticated().then(alert('done'));
+    isStravaAuthenticated().then((val) => alert(val));
     WildRydes.authToken.then(function setAuthToken(token) {
         if (token) {
             authToken = token;
