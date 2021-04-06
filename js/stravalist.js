@@ -4,7 +4,7 @@ var WildRydes = window.WildRydes || {};
 WildRydes.map = WildRydes.map || {};
 
 async function isStravaAuthenticated(){
-    const authToken = await WildRydes.authToken();
+    const authToken = await WildRydes.authToken;
     WildRydes.authToken.then(val => console.log(val));
 
     console.log(JSON.stringify(authToken));
