@@ -29,6 +29,10 @@ var WildRydes = window.WildRydes || {};
         userPool.getCurrentUser().signOut();
     };
 
+    function signOut(){
+        userPool.getCurrentUser().signOut();
+    }
+
     WildRydes.authToken = new Promise(function fetchCurrentAuthToken(resolve, reject) {
         var cognitoUser = userPool.getCurrentUser();
 
@@ -110,6 +114,7 @@ var WildRydes = window.WildRydes || {};
 
     $(function onDocReady() {
         $('#signinForm').submit(handleSignin);
+        $('#signOut').click(signOut);
         $('#registrationForm').submit(handleRegister);
         $('#verifyForm').submit(handleVerify);
     });
