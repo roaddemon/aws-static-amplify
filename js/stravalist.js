@@ -21,7 +21,7 @@ async function isStravaAuthenticated(){
             }
         }),
         contentType: 'application/json',
-        success: completeRequest,
+        success: (data => console.log(JSON.stringify(data))),
         error: function ajaxError(jqXHR, textStatus, errorThrown) {
             console.error('Error requesting ride: ', textStatus, ', Details: ', errorThrown);
             console.error('Response: ', jqXHR.responseText);
