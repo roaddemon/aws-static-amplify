@@ -10,7 +10,7 @@ async function isStravaAuthenticated(){
     console.log(JSON.stringify(authToken));
     result = await $.ajax({
         method: 'POST',
-        url: _config.api.invokeUrl + '/hasuserauthenticatedstrava',
+        url: _config.api.invokeUrlSam + '/hasuserauthenticatedstrava',
         headers: {
             Authorization: authToken
         },
