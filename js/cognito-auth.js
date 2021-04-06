@@ -6,14 +6,14 @@ var WildRydes = window.WildRydes || {};
     var signinUrl = '/signin.html';
 
     var poolData = {
-        UserPoolId: _config.cognito.userPoolId,
-        ClientId: _config.cognito.userPoolClientId
+        UserPoolId: _config.cognito.samUserPoolId,
+        ClientId: _config.cognito.samUserPoolClientId
     };
 
     var userPool;
 
-    if (!(_config.cognito.userPoolId &&
-          _config.cognito.userPoolClientId &&
+    if (!(_config.cognito.samUserPoolId &&
+          _config.cognito.samUserPoolClientId &&
           _config.cognito.region)) {
         $('#noCognitoMessage').show();
         return;
