@@ -100,9 +100,7 @@ async function isStravaAuthenticated(){
     }
 
     function handleRequestClick(event) {
-        var pickupLocation = WildRydes.map.selectedPoint;
-        event.preventDefault();
-        requestUnicorn(pickupLocation);
+        isStravaAuthenticated();
     }
 
     function animateArrival(callback) {
